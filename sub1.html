@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홀트아동복지회</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    mobile_menu();
+});
+
+function mobile_menu(){
+    /* 변수 선언 */
+    var $menu = null;
+    var $left_gnb = null; // 영역 전체
+    var $depth1_wrap = null;
+    var $depth1 = null;
+    var $depth1_btn = null;
+    
+    /* 시작 함수 */
+    function start(){
+        init();
+        init_event();
+    }
+    /* 변수 초기화 함수 */
+    function init(){
+        $menu = $('.m_menu');
+        $left_gnb = $('.left_gnbWrap'); // 영역 전체
+        $depth1_wrap = $('.left_gnb>li');
+        $depth1 = $depth1_wrap.children('ul');
+        $depth1_btn = $depth1_wrap.children('a');
+    }
+    /* 이벤트 함수 */
+    function init_event(){
+        
+        /* 모바일 메뉴 버튼 클릭했을때 모바일 메뉴영역 나오게 하기 */
+        $menu.click(function(event){
+            event.preventDefault();
+            $left_gnb.addClass('on');
+        });
+        
+        /* x버튼 눌렀을때 모바일 메뉴 닫기 */
+        $('.close').click(function(event){
+            event.preventDefault();
+
+            $left_gnb.removeClass('on');
+            
+            // x버튼 누르면 시간차 약간두고 소메뉴 닫히게 하기
+            setTimeout(function(){
+                $depth1_btn.removeClass('on');
+                $depth1.slideUp();
+            },300)
+        });
+        
+        /* depth1의 각메뉴 클릭시 depth2 나오게 하기 */
+        $depth1_btn.click(function(event){
+            event.preventDefault();
+            var $this = $(this);
+            var $this_ul = $this.siblings('ul');
+
+            var check = $this.hasClass('on');
+            if(check){
+                $this.removeClass('on');
+                $this_ul.stop(true,true).slideUp();
+            }else{
+                $depth1_btn.removeClass('on');
+                $depth1.stop().slideUp();
+                $this.addClass('on');
+                $this_ul.stop(true,true).slideDown();
+            }
+        });
+        
+        /* 디바이스 크기 변경시 모바일 메뉴영역 숨기기 */
+        $(window).resize(function(){
+            $left_gnb.removeClass('on');
+        });
+    }
+    
+    start(); // 시작 호출
+}
+</script>
+</head>
+<body>
+    <div id="wrap">
+        <header id="header">
+            <div class="top_header">
+                <div class="inner">
+                    <ul class="site">
+                        <li>공지사항</li>
+                        <li>나눔소식</li>
+                        <li>보도자료</li>
+                        <!--초기화-->
+                    </ul>
+                    <ul class="util">
+                        <li>로그인</li>
+                        <li>입양</li>
+                        <li>ENGLISH</li>
+                        <!--초기화-->
+                    </ul>
+                    <!--초기화-->
+                </div>
+            </div>
+            <div class="bottom_header">
+                <div class="inner">
+                    <ul class="menu">
+                        <li><a href="#">홀트소개</a></li>
+                        <li><a href="#">사업안내</a></li>
+                        <li><a href="#">후원안내</a></li>
+                        <li><a href="#">캠페인</a></li>
+                        <li><a href="#">참여신청</a></li>
+                        <!--초기화-->
+                    </ul>
+                    <div class="logo"><a href="index.html"><img src="images/logo.png"></a></div>
+                    <div class="sub_menu">
+                        <ul class="side">
+                            <li><i><img src="images/heart.jpg"></i>후원하기</li>
+                        </ul>
+                        <div class="search">
+                            <img src="images/search.jpg">
+                        </div>
+                        <div class="m_menu">
+                            <img src="images/bar.jpg">
+                        </div>
+                        <nav class="left_gnbWrap">
+            <a href="#" class="close"><img src="images/iconfinder_ic_close_48px_352270.png"></a>
+            <ul class="left_gnb">
+                <li>
+                    <a href="#">홀트소개</a>
+                    <ul>
+                        <li><a href="#">sub1</a></li>
+                        <li><a href="#">sub2</a></li>
+                        <li><a href="#">sub3</a></li>
+                        <li><a href="#">sub4</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">사업안내</a>
+                    <ul>
+                        <li><a href="#">sub1</a></li>
+                        <li><a href="#">sub2</a></li>
+                        <li><a href="#">sub3</a></li>
+                        <li><a href="#">sub4</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">후원안내</a>
+                    <ul>
+                        <li><a href="#">sub1</a></li>
+                        <li><a href="#">sub2</a></li>
+                        <li><a href="#">sub3</a></li>
+                        <li><a href="#">sub4</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">캠페인</a>
+                    <ul>
+                        <li><a href="#">sub1</a></li>
+                        <li><a href="#">sub2</a></li>
+                        <li><a href="#">sub3</a></li>
+                        <li><a href="#">sub4</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">참여신청</a>
+                    <ul>
+                        <li><a href="#">sub1</a></li>
+                        <li><a href="#">sub2</a></li>
+                        <li><a href="#">sub3</a></li>
+                        <li><a href="#">sub4</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+                        <!--초기화-->
+                    </div>
+                    <!--초기화-->
+                </div>
+            </div>
+        </header>
+        
+        
+        
+        
+        <!--여기부터 서브1 컨텐츠-->
+        
+        <main id="sub1_contents">
+            <section class="location">
+                <div class="inner">
+                    <ul>
+                        <li>
+                            <img src="images/sub_logo.png">
+                        </li>
+                        <li>
+                            <select>
+                                <option>&nbsp;&nbsp;캠페인</option>
+                                <option>&nbsp;&nbsp;상품</option>
+                                <option>&nbsp;&nbsp;상품</option>
+                                <option>&nbsp;&nbsp;상품</option>
+                            </select>
+                        </li>
+                        <li>
+                            <select>
+                                <option>&nbsp;&nbsp;참여형 캠페인</option>
+                                <option>&nbsp;&nbsp;상품</option>
+                                <option>&nbsp;&nbsp;상품</option>
+                                <option>&nbsp;&nbsp;상품</option>
+                            </select>
+                        </li>
+                        <li>
+                            <select>
+                                <option>&nbsp;&nbsp;나를 지켜주세요</option>
+                                <option>&nbsp;&nbsp;상품</option>
+                                <option>&nbsp;&nbsp;상품</option>
+                                <option>&nbsp;&nbsp;상품</option>
+                            </select>
+                        </li>
+                        <!--초기화-->
+                    </ul>
+                </div>
+            </section>
+            <section class="titlebodyimg">
+                <h1 class="hidden">서브이미지</h1>
+                <p>*완성된 키트는 도움이 필요한 아이들에게 전달되며,<br>캠페인 참여를 통한 후원금은 위기가정아동 지원을 위해 소중히 사용됩니다.</p>
+            </section>
+            <section class="product">
+                <h1>아이들과 지구, 모두를 위한 북커버</h1>
+                <div class="product_info">
+                    <dl>
+                        <dt><i><img src="images/box1_icon_01.jpg"></i>재생가죽</dt>
+                        <dd>자투리 가죽을 모아 만든 재생가죽</dd>
+                    </dl>
+                    <dl>
+                        <dt><i><img src="images/box1_icon_02.jpg"></i>건식제조</dt>
+                        <dd>물을 절약하는 건식 제조 방식</dd>
+                    </dl>
+                    <dl>
+                        <dt><i><img src="images/box1_icon_03.jpg"></i>무독성</dt>
+                        <dd>인체 유해한 유독성 물질 無</dd>
+                    </dl>
+                </div>
+                <p>북커버에 사용된 재생가죽은 버려지는 자투리 가죽을 모아 재생산되었습니다. 또한 일반 가죽 공정과 달리<br>물을 거의 사용하지 않는 건식 제조 방식으로, 소재부터 제조방식까지 환경을 생각했습니다.<br>친환경 핸즈온 봉사활동으로 아이들과 지구를 함께 지켜주세요.</p>
+            </section>
+            <section class="bookcover">
+                <h1 class="hidden">위기 아동 지원 캠페인</h1>
+                <h3>위기 아동 지원 캠페인</h3>
+                <div class="bookcover_set">
+                    <div class="bookbox1">
+                        <i class="bookbox_img">
+                            <img src="images/box2_icon_01.png">
+                        </i>
+                        <p class="txt1">모든 아이들은 보호받을 권리가 있습니다.</p>
+                        <p class="btn_view">The right to be protected</p>
+                        <p class="txt2">캠페인 참여금<br>위기가정아동 지원</p>
+                        <p class="btn_signup">참여 신청 바로가기</p>
+                    </div>
+                    <div class="bookbox2">
+                        <i class="bookbox_img">
+                            <img src="images/box2_icon_02.png">
+                        </i>
+                        <p class="txt1">우리가 포기해도 되는 아이는 없습니다.</p>
+                        <p class="btn_view">child protect</p>
+                        <p class="txt2">북커버 만들어<br>아이들에게 선물</p>
+                        <p class="btn_signup">캠페인 소식 확인하기</p>
+                    </div>
+                    <!--초기화-->
+                </div>
+                <ul class="bookcover_list">
+                    <li>*북커버 키트는 참여 신청 시 1주일 이내로 발송됩니다.</li>
+                    <li>*완성된 북커버는 배송받은 포장봉투에 그대로 담아 홀트아동복지회로 보내주세요.</li>
+                </ul>
+            </section>
+        </main>
+        
+        <!--여기까지 서브1 컨텐츠-->
+        
+        
+        
+           
+           <footer id="footer">
+            <div class="top_footer">
+                <div class="inner">
+                    <ul>
+                        <li>개인정보처리방침</li>
+                        <li>이용약관</li>
+                        <li>찾아오시는 길</li>
+                        <li>뉴스레터 신청</li>
+                        <!--초기화-->
+                    </ul>
+                </div>
+            </div>
+            <div class="bottom_footer">
+                <div class="inner">
+                    <div class="f_logo">
+                        <img src="images/f_logo.png">
+                    </div>
+                    <div class="copyright">
+                        <ul>
+                            <li>04027 서울시 마포구 양화로 19 (구주소 : 서울시 마포구 합정동 471)</li>
+                            <li>대표전화 : 02 - 331 - 7000 (교환)</li>
+                            <li>대표자 : 설태호</li>
+                            <li>사업자번호 : 105 - 82 - 00242</li>
+                            <li>개인보호정책 : 김호현</li>
+                        </ul>
+                        <p>COPYRYGHT 2019 · HOLT ALL RIGHTS RESERVED.</p>
+                    </div>
+                    <div class="info">
+                        <ul>
+                            <li>후원계좌 : KB국민은행 479037-01-000461 (사)홀트아동복지회</li>
+                            <li>ARS후원 : 060-700-1006</li>
+                            <li>후원문의 : TEL : 02-331-7073~6 / E-mail : sponsor@holt.or.kr</li>
+                        </ul>
+                    </div>
+                    <!--초기화-->
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
